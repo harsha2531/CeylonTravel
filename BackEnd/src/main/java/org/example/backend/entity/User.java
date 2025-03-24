@@ -1,7 +1,8 @@
 package org.example.backend.entity;
 import jakarta.persistence.*;
 import org.example.backend.enums.UserRole;
-import org.springframework.data.annotation.Id;
+
+import java.util.List;
 
 @Entity
 @Table(name = "users")
