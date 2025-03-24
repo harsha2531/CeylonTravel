@@ -1,8 +1,8 @@
 package org.example.backend.controller;
 
+import lombok.RequiredArgsConstructor;
 import org.example.backend.dto.TourPackageDTO;
 import org.example.backend.service.TourPackageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,33 +10,34 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tour-packages")
+@RequiredArgsConstructor
 public class TourPackageController {
 
-    @Autowired
-    private TourPackageService tourPackageService;
+    private final TourPackageService tourPackageService;
+
+    @PostMapping
+    public ResponseEntity<TourPackageDTO> createTourPackage(@RequestBody TourPackageDTO tourPackageDto) {
+        return ResponseEntity.ok(tourPackageService.saveTourPackage(tourPackageDto));
+    }
 
     @GetMapping
-    public ResponseEntity<List<TourPackageDTO>> getAllPackages() {
-        return ResponseEntity.ok(tourPackageService.getAllPackages());
+    public ResponseEntity<List<TourPackageDTO>> getAllTourPackages() {
+        return ResponseEntity.ok(tourPackageService.getAllTourPackages());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TourPackageDTO> getPackageById(@PathVariable int id) {
-        return ResponseEntity.ok(tourPackageService.getPackageById(id));
-    }
-
-    @PostMapping
-    public ResponseEntity<TourPackageDTO> createPackage(@RequestBody TourPackageDTO dto) {
-        return ResponseEntity.ok(tourPackageService.savePackage(dto));
+    public ResponseEntity<TourPackageDTO> getTourPackageById(@PathVariable Long id) {
+        return ResponseEntity.ok(tourPackageService.getTourPackageById(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TourPackageDTO> updatePackage(@PathVariable int id, @RequestBody TourPackageDTO dto) {
-        return ResponseEntity.ok(tourPackageService.updatePackage(id, dto));
+    public ResponseEntity<TourPackageDTO> updateTourPackage(@PathVariable Long id, @RequestBody TourPackageDTO tourPackageDto) {
+        return ResponseEntity.ok(tourPackageService.updateTourPackage(id, tourPackageDto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePackage(@PathVariable int id) {
-        return tourPackageService.deletePackage(id) ? ResponseEntity.ok("Package deleted successfully") : ResponseEntity.notFound().build();
+    public ResponseEntity<String> deleteTourPackage(@PathVariable Long id) {
+        tourPackageService.deleteTourPackage(id);
+        return ResponseEntity.ok("Tour Package deleted successfully");
     }
 }
