@@ -7,22 +7,22 @@ import org.example.backend.entity.TourPackage;
 import org.example.backend.entity.User;
 import org.example.backend.enums.BookingStatus;
 import org.example.backend.repo.BookingRepo;
-import org.example.backend.repo.TourPackageRepository;
+import org.example.backend.repo.TourPackageRepo;
 import org.example.backend.repo.UserRepo;
+import org.example.backend.service.BookingService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class BookingServiceImpl {
+public class BookingServiceImpl implements BookingService {
 
     private final BookingRepo bookingRepository;
     private final UserRepo userRepository;
-    private final TourPackageRepository tourPackageRepository;
+    private final TourPackageRepo tourPackageRepository;
 
     @Transactional
     public BookingDTO saveBooking(BookingDTO bookingDto) {

@@ -2,19 +2,36 @@ package org.example.backend.service;
 
 import org.example.backend.dto.TourPackageDTO;
 import org.example.backend.entity.TourPackage;
+import org.example.backend.entity.User;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public interface TourPackageService {
-    public List<TourPackageDTO> getAllPackages();
+    @Transactional
+    public TourPackageDTO saveTourPackage(TourPackageDTO tourPackageDto);
 
+    public List<TourPackageDTO> getAllTourPackages();
 
-    public TourPackageDTO getPackageById(int id);
+    public TourPackageDTO getTourPackageById(Long id);
 
-    public TourPackageDTO savePackage(TourPackageDTO dto);
+    @Transactional
+    public TourPackageDTO updateTourPackage(Long id, TourPackageDTO tourPackageDto);
 
-    public TourPackageDTO updatePackage(int id, TourPackageDTO dto);
+    @Transactional
+    public void deleteTourPackage(Long id);
 
-    public boolean deletePackage(int id);
+    private TourPackageDTO mapToDto(TourPackage tourPackage) {
+        return new TourPackageDTO(
+                tourPackage.getId(),
+                tourPackage.getPackageName(),
+                tourPackage.getDescription(),
+                tourPackage.getPrice(),
+                tourPackage.getDuration(),
+                tourPackage.getLocation(),
+                tourPackage.getImageUrl(),
+                tourPackage.getAgency().getId() // Map agency id
+        );
+    }
 }
