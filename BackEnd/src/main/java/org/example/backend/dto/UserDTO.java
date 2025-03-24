@@ -1,17 +1,18 @@
 package org.example.backend.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.example.backend.enums.UserRole;
 
-
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-@Data
+@AllArgsConstructor
+@Builder
 public class UserDTO {
+    private Long id;
+    private String firstName;
+    private String lastName;
     private String email;
-    private String name;
     private String phone;
-    private String password;
-    private String role;
+    private UserRole role;
 }

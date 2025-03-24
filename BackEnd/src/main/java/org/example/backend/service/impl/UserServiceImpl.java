@@ -1,114 +1,68 @@
 package org.example.backend.service.impl;
 
-
 import org.example.backend.dto.UserDTO;
 import org.example.backend.entity.User;
-import org.example.backend.repo.UserRepository;
+import org.example.backend.repo.UserRepo;
 import org.example.backend.service.UserService;
-import org.example.backend.util.VarList;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
+import java.util.stream.Collectors;
 
 @Service
-@Transactional
-public class UserServiceImpl implements UserDetailsService, UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepo userRepository;
 
-    @Autowired
-    private ModelMapper modelMapper;
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    public ResponseEntity<String> updateUserProfile(String email, UserDTO userDTO) {
-        Optional<User> optionalUser = Optional.ofNullable(userRepository.findByEmail(email));
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            user.setName(userDTO.getName());
-            user.setPhone(userDTO.getPhone());
-            userRepository.save(user);
-            return ResponseEntity.ok("Profile updated successfully");
-        }
-        return ResponseEntity.badRequest().body("User not found");
+    // ✅ Get all users
+    public List<UserDTO> getAllUsers() {
+        return userRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
-    public ResponseEntity<String> updateUserPassword(String email, String oldPassword, String newPassword) {
-        Optional<User> optionalUser = Optional.ofNullable(userRepository.findByEmail(email));
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            if (passwordEncoder.matches(oldPassword, user.getPassword())) {
-                user.setPassword(passwordEncoder.encode(newPassword));
-                userRepository.save(user);
-                return ResponseEntity.ok("Password updated successfully");
-            } else {
-                return ResponseEntity.badRequest().body("Old password is incorrect");
-            }
-        }
-        return ResponseEntity.badRequest().body("User not found");
+    // ✅ Get user by ID
+    public Optional<UserDTO> getUserById(Long id) {
+        return userRepository.findById(id).map(this::convertToDTO);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
+    // ✅ Save a new user
+    public UserDTO saveUser(User user) {
+        User savedUser = userRepository.save(user);
+        return convertToDTO(savedUser);
     }
 
-    public UserDTO loadUserDetailsByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username);
-        return modelMapper.map(user,UserDTO.class);
+    // ✅ Update an existing user
+    public UserDTO updateUser(Long id, User updatedUser) {
+        return userRepository.findById(id).map(existingUser -> {
+            existingUser.setFirstName(updatedUser.getFirstName());
+            existingUser.setLastName(updatedUser.getLastName());
+            existingUser.setEmail(updatedUser.getEmail());
+            existingUser.setPhone(updatedUser.getPhone());
+            existingUser.setRole(updatedUser.getRole());
+            User savedUser = userRepository.save(existingUser);
+            return convertToDTO(savedUser);
+        }).orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
     }
 
-    private Set<SimpleGrantedAuthority> getAuthority(User user) {
-        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        return authorities;
+    // ✅ Delete a user
+    public String deleteUser(Long id) {
+        userRepository.deleteById(id);
+        return "User deleted successfully!";
     }
 
-    @Override
-    public UserDTO searchUser(String username) {
-        if (userRepository.existsByEmail(username)) {
-            User user=userRepository.findByEmail(username);
-            return modelMapper.map(user,UserDTO.class);
-        } else {
-            return null;
-        }
+    // Convert Entity to DTO
+    private UserDTO convertToDTO(User user) {
+        return UserDTO.builder()
+                .id(user.getId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .phone(user.getPhone())
+                .role(user.getRole())
+                .build();
     }
-
-    public ResponseEntity<String> saveUser(UserDTO userDTO) {
-        if (userRepository.existsByEmail(userDTO.getEmail())) {
-            return ResponseEntity.badRequest().body("User already exists");
-        }
-        User user = new User();
-        user.setEmail(userDTO.getEmail());
-        user.setName(userDTO.getName());
-        user.setPhone(userDTO.getPhone());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
-        user.setRole("USER");
-        userRepository.save(user);
-        return ResponseEntity.ok("User saved successfully");
-    }
-
-    public ResponseEntity<String> deleteUser(String email) {
-        Optional<User> optionalUser = Optional.ofNullable(userRepository.findByEmail(email));
-        if (optionalUser.isPresent()) {
-            userRepository.delete(optionalUser.get());
-            return ResponseEntity.ok("User deleted successfully");
-        }
-        return ResponseEntity.badRequest().body("User not found");
-    }
-    }
+}

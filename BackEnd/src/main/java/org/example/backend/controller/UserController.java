@@ -1,42 +1,48 @@
 package org.example.backend.controller;
 
-import jakarta.validation.Valid;
 import org.example.backend.dto.UserDTO;
-import org.example.backend.service.UserService;
+import org.example.backend.entity.User;
+import org.example.backend.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "http://localhost:63342", allowedHeaders = "*")
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
-    @PutMapping("/update-profile")
-    public ResponseEntity<String> updateProfile(@AuthenticationPrincipal UserDetails userDetails, @RequestBody UserDTO userDTO) {
-        String email = userDetails.getUsername();
-        return userService.updateUserProfile(email, userDTO);
+    // ✅ Get all users
+    @GetMapping
+    public List<UserDTO> getAllUsers() {
+        return userService.getAllUsers();
     }
 
-    @PutMapping("/update-password")
-    public ResponseEntity<String> updatePassword(@AuthenticationPrincipal UserDetails userDetails, @RequestParam String oldPassword, @RequestParam String newPassword) {
-        String email = userDetails.getUsername();
-        return userService.updateUserPassword(email, oldPassword, newPassword);
+    // ✅ Get user by ID
+    @GetMapping("/{id}")
+    public Optional<UserDTO> getUserById(@PathVariable Long id) {
+        return userService.getUserById(id);
     }
 
-    @PostMapping("/signup")
-    public ResponseEntity<String> saveUser(@Valid @RequestBody UserDTO userDTO) {
-        return userService.saveUser(userDTO);
+    // ✅ Save a new user
+    @PostMapping
+    public UserDTO saveUser(@RequestBody User user) {
+        return userService.saveUser(user);
     }
 
-    @DeleteMapping("/delete/{email}")
-    public ResponseEntity<String> deleteUser(@PathVariable String email) {
-        return userService.deleteUser(email);
+    // ✅ Update an existing user
+    @PutMapping("/{id}")
+    public UserDTO updateUser(@PathVariable Long id, @RequestBody User user) {
+        return userService.updateUser(id, user);
     }
 
+    // ✅ Delete a user
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id) {
+        return userService.deleteUser(id);
+    }
 }
