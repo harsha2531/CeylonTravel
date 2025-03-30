@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CeylonTravel.iml" filepath="$PROJECT_DIR$/CeylonTravel.iml" />
       <module fileurl="file://$PROJECT_DIR$/FrontEnd.iml" filepath="$PROJECT_DIR$/FrontEnd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frontEnd.iml" filepath="$PROJECT_DIR$/frontEnd.iml" />
     </modules>
   </component>
 </project>
