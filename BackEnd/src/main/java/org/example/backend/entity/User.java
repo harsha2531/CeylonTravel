@@ -25,7 +25,7 @@ public class User {
 
     private Boolean isVerified = false;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "traveler", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
     public User() {}
