@@ -25,6 +25,10 @@ public class TourPackage {
     @OneToMany(mappedBy = "tourPackage", cascade = CascadeType.ALL)
     private List<Booking> bookings;
 
+    @ManyToOne
+    @JoinColumn(name = "destination_id")
+    private Destination destination;
+
     public TourPackage() {}
 
     public TourPackage(Long id, String packageName, String description, Double price, Integer duration, String location, String imageUrl, User agency, List<Booking> bookings) {
