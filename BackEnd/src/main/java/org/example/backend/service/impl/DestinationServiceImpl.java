@@ -30,7 +30,7 @@ public class DestinationServiceImpl implements DestinationService {
         destination.setDescription(dto.getDescription());
         destination.setImageUrl(dto.getImageUrl());
         Destination updated = destinationRepository.save(destination);
-        return new DestinationDTO(updated.getId(), updated.getDestinationName(), updated.getDescription(), updated.getImageUrl());
+        return new DestinationDTO(updated.getId(), updated.getDestinationName(), updated.getDescription(), updated.getImageUrl(),updated.getTourPackages());
     }
 
     @Override
