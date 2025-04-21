@@ -1,5 +1,6 @@
 package org.example.backend.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.example.backend.dto.DestinationDTO;
 import org.example.backend.entity.Destination;
 import org.example.backend.repo.DestinationRepo;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class DestinationServiceImpl implements DestinationService {
 
     @Autowired

@@ -17,25 +17,21 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepo userRepository;
 
-    // ✅ Get all users
     public List<UserDTO> getAllUsers() {
         return userRepository.findAll().stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
-    // ✅ Get user by ID
     public Optional<UserDTO> getUserById(Long id) {
         return userRepository.findById(id).map(this::convertToDTO);
     }
 
-    // ✅ Save a new user
     public UserDTO saveUser(User user) {
         User savedUser = userRepository.save(user);
         return convertToDTO(savedUser);
     }
 
-    // ✅ Update an existing user
     public UserDTO updateUser(Long id, User updatedUser) {
         return userRepository.findById(id).map(existingUser -> {
             existingUser.setFirstName(updatedUser.getFirstName());
@@ -48,7 +44,6 @@ public class UserServiceImpl implements UserService {
         }).orElseThrow(() -> new RuntimeException("User not found with ID: " + id));
     }
 
-    // ✅ Delete a user
     public String deleteUser(Long id) {
         userRepository.deleteById(id);
         return "User deleted successfully!";

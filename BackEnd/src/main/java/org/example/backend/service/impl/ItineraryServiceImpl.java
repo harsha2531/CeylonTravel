@@ -1,6 +1,7 @@
 package org.example.backend.service.impl;
 
 
+import lombok.RequiredArgsConstructor;
 import org.example.backend.entity.Itinerary;
 import org.example.backend.repo.ItineraryRepo;
 import org.example.backend.service.ItineraryService;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class ItineraryServiceImpl implements ItineraryService {
 
     @Autowired
