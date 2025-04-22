@@ -19,9 +19,9 @@ $(document).ready(function () {
       data: JSON.stringify(loginData),
       success: function (response) {
         alert("Login successful!");
-        localStorage.setItem("token", response.content.token);
-        localStorage.setItem("email", response.content.email);
-        window.location.href = "index.html"; // Redirect on success
+        localStorage.setItem("token", response.content);
+        localStorage.setItem("email", response.content);
+        window.location.href = "../index.html";
       },
       error: function (xhr, status, error) {
         alert("Login failed: " + xhr.responseJSON.message);
