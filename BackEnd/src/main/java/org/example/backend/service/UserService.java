@@ -15,18 +15,8 @@ public interface UserService {
 
     public UserDTO saveUser(User user);
 
-    public UserDTO updateUser(Long id, User updatedUser);
+    public UserDTO updateUser(Long id, User user);
 
     public String deleteUser(Long id);
 
-    private UserDTO convertToDTO(User user) {
-        return UserDTO.builder()
-                .id(user.getId())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .email(user.getEmail())
-                .phone(user.getPhone())
-                .role(user.getRole())
-                .build();
-    }
 }
