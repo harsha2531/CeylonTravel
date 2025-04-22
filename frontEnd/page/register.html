@@ -65,41 +65,43 @@
   <div class="container-fluid bg-primary py-5 mb-5 hero-header">
     <div class="container py-5">
       <div class="row justify-content-center py-5">
-        <!-- Registration Form Start -->
-        <div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
-          <div class="col-md-6">
-            <div class="card p-4 shadow-lg">
-              <h2 class="text-center mb-4">Register</h2>
-              <form>
-                <div class="mb-3">
-                  <label for="firstName" class="form-label">First Name</label>
-                  <input type="text" class="form-control" id="firstName" placeholder="Enter your first name" required>
-                </div>
-                <div class="mb-3">
-                  <label for="lastName" class="form-label">Last Name</label>
-                  <input type="text" class="form-control" id="lastName" placeholder="Enter your last name" required>
-                </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="password" placeholder="Enter your password" required>
-                </div>
-                <div class="mb-3">
-                  <label for="phone" class="form-label">Phone</label>
-                  <input type="text" class="form-control" id="phone" placeholder="Enter your phone number" required>
-                </div>
-                <button type="submit" class="btn btn-primary w-100" id="register-btn">Register</button>
-              </form>
-              <div class="text-center mt-3">
-                <a href="login.html">Already have an account? Login</a>
+        <div class="container mt-5">
+          <div class="card shadow-lg rounded-4 p-4 mx-auto" style="max-width: 600px;">
+            <h3 class="text-center mb-4">Register</h3>
+            <form id="register-form">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" id="firstName" class="form-control" required>
               </div>
-            </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" id="lastName" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" id="phone" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label for="role" class="form-label">Role</label>
+                <select id="role" class="form-select" required>
+                  <option value="">Select Role</option>
+                  <option value="TRAVELER">Traveler</option>
+                  <option value="AGENCY">Agency</option>
+                  <option value="ADMIN">Admin</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary w-100" id="register-btn">Register</button>
+            </form>
           </div>
         </div>
-        <!-- Registration Form End -->
   </div>
 </div>
   </div>

@@ -1,4 +1,3 @@
-// Register User
 $("#register-btn").click(function (event) {
   event.preventDefault();
 
@@ -6,12 +5,15 @@ $("#register-btn").click(function (event) {
     firstName: $("#firstName").val().trim(),
     lastName: $("#lastName").val().trim(),
     email: $("#email").val().trim(),
+    phone: $("#phone").val().trim(),
     password: $("#password").val().trim(),
-    phone: $("#phone").val().trim()
+    role: $("#role").val(),
+    verified: false
   };
 
-  if (!userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.phone) {
-    alert("All fields are required.");
+  // Validate fields
+  if (!userData.firstName || !userData.lastName || !userData.email || !userData.password || !userData.phone || !userData.role) {
+    alert("Please fill in all fields.");
     return;
   }
 
@@ -21,12 +23,12 @@ $("#register-btn").click(function (event) {
     contentType: "application/json",
     data: JSON.stringify(userData),
     success: function () {
-      alert("Registration successful!");
-      window.location.href = "login.html";
+      alert("User registered successfully!");
+      $("#register-form")[0].reset();
     },
-    error: function (err) {
-      console.error("Registration failed:", err);
-      alert("Registration failed: " + (err.responseText || "Unknown error"));
+    error: function (xhr, status, error) {
+      console.error("Registration failed:", error);
+      alert("Registration failed. Check console for details.");
     }
   });
 });
