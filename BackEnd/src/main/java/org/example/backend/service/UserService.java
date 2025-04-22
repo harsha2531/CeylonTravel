@@ -3,6 +3,8 @@ package org.example.backend.service;
 import org.example.backend.dto.UserDTO;
 import org.example.backend.entity.User;
 import org.example.backend.enums.UserRole;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,5 +20,7 @@ public interface UserService {
     public UserDTO updateUser(Long id, User user);
 
     public String deleteUser(Long id);
+
+    public UserDetails loadUserByUsername(String email);
 
 }

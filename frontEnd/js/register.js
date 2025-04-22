@@ -18,7 +18,7 @@ $("#register-btn").click(function (event) {
   }
 
   $.ajax({
-    url: "http://localhost:8080/api/v1/users/save",
+    url: "http://localhost:8080/api/v1/user/save",
     method: "POST",
     contentType: "application/json",
     data: JSON.stringify(userData),
