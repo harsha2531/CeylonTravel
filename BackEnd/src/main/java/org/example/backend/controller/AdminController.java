@@ -15,14 +15,16 @@ public class AdminController {
     }
 
     @GetMapping("/test2")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('TRAVELER')")
     public String checks(){
-        return "passed~!2";
+        return "Traveler access passed~!2";
     }
+
     @GetMapping("/test3")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('AGENCY')")
     public String checkss(){
-        return "passed~!2";
+        return "Agency access passed~!3";
     }
+
 
 }
