@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
+@CrossOrigin(origins = "http://localhost:63342", allowedHeaders = "*")
 public class UserController {
 
     @Autowired
@@ -26,7 +27,7 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @PostMapping
+    @PostMapping("save")
     public UserDTO saveUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
