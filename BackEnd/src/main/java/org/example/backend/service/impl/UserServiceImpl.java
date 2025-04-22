@@ -38,6 +38,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDTO saveUser(User user) {
+        // Encrypt the password before saving
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        // Save and map to DTO
         return modelMapper.map(userRepository.save(user), UserDTO.class);
     }
 
