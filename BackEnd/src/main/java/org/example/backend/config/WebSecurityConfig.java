@@ -50,6 +50,8 @@ public class WebSecurityConfig {
                                 "/api/v1/auth/authenticate",
                                 "/api/v1/user/save",
                                 "/api/v1/user/getAllUsers",
+                                "/api/v1/agency/save",
+                                "/api/v1/agency/getAll",
                                 "/api/v1/auth/refreshToken",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
