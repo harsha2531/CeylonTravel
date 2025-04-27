@@ -154,32 +154,16 @@ $(document).ready(function () {
     $("#agencyContact").val('');
   }
 
-  function showToast(message, type = 'success') {
-    const toastBody = $("#toast-body");
-    const toast = new bootstrap.Toast($('#liveToast'));
-
-    // Set message
-    toastBody.text(message);
-
-    // Set background color
-    const toastElement = $("#liveToast");
-    toastElement.removeClass('text-bg-success text-bg-danger text-bg-info text-bg-warning');
-
-    switch (type) {
-      case 'success':
-        toastElement.addClass('text-bg-success');
-        break;
-      case 'error':
-        toastElement.addClass('text-bg-danger');
-        break;
-      case 'info':
-        toastElement.addClass('text-bg-info');
-        break;
-      case 'warning':
-        toastElement.addClass('text-bg-warning');
-        break;
+  function showToast(message) {
+    const toastElement = document.getElementById('liveToast');
+    if (!toastElement) {
+      console.error('Toast element not found!');
+      return;
     }
 
+    toastElement.querySelector('.toast-body').textContent = message; // update the text
+
+    const toast = new bootstrap.Toast(toastElement);
     toast.show();
   }
 

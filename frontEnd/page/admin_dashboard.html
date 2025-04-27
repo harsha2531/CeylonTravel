@@ -188,15 +188,24 @@
       <tr>
         <th>ID</th>
         <th>Destination</th>
-        <th>Country</th>
+        <th>Location</th>
         <th>Actions</th>
       </tr>
       </thead>
       <tbody>
       <tr>
         <td>1</td>
+        <td>Nine-Arch Bridge</td>
         <td>Ella</td>
-        <td>Sri Lanka</td>
+        <td>
+          <button class="btn btn-sm btn-primary">Edit</button>
+          <button class="btn btn-sm btn-danger">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Galle Fort</td>
+        <td>Galle</td>
         <td>
           <button class="btn btn-sm btn-primary">Edit</button>
           <button class="btn btn-sm btn-danger">Delete</button>
@@ -224,6 +233,15 @@
         <td>1</td>
         <td>John Doe</td>
         <td>$500</td>
+        <td>Completed</td>
+        <td>
+          <button class="btn btn-sm btn-info">View</button>
+        </td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Thomas David</td>
+        <td>$700</td>
         <td>Completed</td>
         <td>
           <button class="btn btn-sm btn-info">View</button>
@@ -259,22 +277,36 @@
           <button class="btn btn-sm btn-danger">Cancel</button>
         </td>
       </tr>
+      <tr>
+        <td>2</td>
+        <td>Thomas David</td>
+        <td>Ella Adventure</td>
+        <td>2025-06-20</td>
+        <td>Confirmed</td>
+        <td>
+          <button class="btn btn-sm btn-info">View</button>
+          <button class="btn btn-sm btn-danger">Cancel</button>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
 
 </div>
 <!-- Toast container -->
-<div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
-  <div id="liveToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="d-flex">
-      <div class="toast-body" id="toast-body">
-        <!-- Message will be inserted dynamically -->
-      </div>
-      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto">Notification</strong>
+      <small>Just now</small>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Hello, this is a toast message.
     </div>
   </div>
 </div>
+
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
