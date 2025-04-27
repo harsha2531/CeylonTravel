@@ -10,7 +10,6 @@ public class TourPackage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String packageName;
     private String description;
     private Double price;
