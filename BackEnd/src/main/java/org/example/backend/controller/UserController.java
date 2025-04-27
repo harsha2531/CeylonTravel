@@ -4,6 +4,7 @@ import org.example.backend.dto.UserDTO;
 import org.example.backend.entity.User;
 import org.example.backend.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,9 +19,14 @@ public class UserController {
     @Autowired
     private UserServiceImpl userService;
 
-    @GetMapping
-    public List<UserDTO> getAllUsers() {
-        return userService.getAllUsers();
+    public UserController(UserServiceImpl userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/getAllUsers")
+    public ResponseEntity<List<UserDTO>> getAllUsers() {
+        List<UserDTO> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
