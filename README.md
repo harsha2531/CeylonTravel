@@ -67,9 +67,19 @@ A modern, web-based platform built to streamline the tourism industry by simplif
 
 ## 📸 Screenshots
 **Home Page**
-
+![ss1](frontEnd/screenshot/ss1.PNG)
+**Package Section**
+![ss2](frontEnd/screenshot/ss2.PNG)
+**Login Page**
+![ss3](frontEnd/screenshot/ss3.PNG)
+**Contact Section**
+![ss4](frontEnd/screenshot/ss4.PNG)
+**Admin Dashboard**
+![ss5](frontEnd/screenshot/ss5.PNG)
+![ss6](frontEnd/screenshot/ss6.PNG)
 
 ---
+📽️ **Watch the Demo Video**: [YouTube Link](https://youtu.be/tBOfHENeEYo?si=CzMUYKzWwB950AP3 )
 
 ## 🧑‍💻 Authors
 
