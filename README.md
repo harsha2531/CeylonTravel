@@ -66,8 +66,8 @@ A modern, web-based platform built to streamline the tourism industry by simplif
 ---
 
 ## 📸 Screenshots
+**Home Page**
 
-> *(Add screenshots of key pages like Home, Dashboard, Booking, etc. once available)*
 
 ---
 
